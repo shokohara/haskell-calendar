@@ -1,0 +1,27 @@
+sudo: false
+language: c
+cache:
+  directories:
+  - $HOME/.stack
+addons:
+  apt:
+    packages:
+      - libgmp-dev
+before_install:
+- mkdir -p ~/.local/bin
+- export PATH=$HOME/.local/bin:$PATH
+- travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+install:
+- stack setup
+script:
+- stack --no-terminal test --no-haddock-deps
+- stack --no-terminal runghc app/Main.hs 1
+- stack --no-terminal runghc app/Main.hs 2
+- stack --no-terminal runghc app/Main.hs 3
+- stack --no-terminal runghc app/Main.hs 4
+- stack --no-terminal runghc app/Main.hs 5
+- stack --no-terminal runghc app/Main.hs 6
+- stack --no-terminal runghc app/Main.hs 7
+- stack --no-terminal runghc app/Main.hs 8
+- stack --no-terminal runghc app/Main.hs 9
+
